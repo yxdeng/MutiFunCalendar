@@ -31,29 +31,46 @@ public class MainView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        //draw the head
-        Paint light = new Paint();
-        light.setColor(Color.WHITE);
         float oldheight = height;
         float rheight = getHeight() - height;
+        height = rheight / 7f;        
+        //draw the head
+        drawHead(canvas, oldheight);      
+        // Draw the minor grid lines
+        drawGrid(canvas,  oldheight);
+        //draw this month
+        drawMonth( canvas,  oldheight, rheight);
+        //draw content
+        drawConcent(canvas,  oldheight);
+    }
 
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        width = w / 7f;
+        height = h / 7f;
+        super.onSizeChanged(w, h, oldw, oldh);
+    }
+
+    private void drawHead(Canvas canvas, float oldheight){
         Paint head = new Paint();
         head.setColor(Color.GREEN);
         canvas.drawLine(0, oldheight, getWidth(), oldheight, head);
         canvas.drawLine(width, 0, width, oldheight, head);
         canvas.drawLine(getWidth() - width, 0, getWidth() - width, oldheight, head);
+    }
 
-        height = rheight / 7f;
-
-        // Draw the minor grid lines
+    private void drawGrid(Canvas canvas,  float oldheight){
+        Paint light = new Paint();
+        light.setColor(Color.WHITE);
         for (int i = 1; i < 7; i++) {
             canvas.drawLine(0, i * height + oldheight, getWidth(), i * height + oldheight,
                     light);
             canvas.drawLine(i * width, oldheight, i * width, getHeight(),
                     light);
         }
+    }
 
-        //draw this month
+    private void drawMonth(Canvas canvas,  float oldheight, float rheight){
         Paint montPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         montPaint.setColor(Color.BLUE);
         montPaint.setStyle(Style.FILL);
@@ -62,10 +79,12 @@ public class MainView extends View {
         montPaint.setTextSize(rheight * 0.5f);
         canvas.drawText(String.valueOf(myCal.getCurrent_month()+1), getWidth() / 2f, (rheight / 2f)+2*oldheight, montPaint);
 
+    }
+
+    private void drawConcent(Canvas canvas,  float oldheight){
         Paint foreground = new Paint(Paint.ANTI_ALIAS_FLAG);
         foreground.setColor(Color.RED);
         foreground.setStyle(Style.FILL);
-
         foreground.setTextScaleX(width / height);
         foreground.setTextAlign(Paint.Align.CENTER);
         foreground.setTextSize(height * 0.5f);
@@ -87,20 +106,18 @@ public class MainView extends View {
                     * width + x, y + oldheight, foreground);
         }
 
-
-
         //draw all the month
         int count = 1;
         int j = myCal.getFirDayWeekOfMonth()-1;
         for (Integer i = 1; i <= myCal.getMonthDays(); i++) {
             if (i == myCal.getNow_day() && myCal.getCurrent_month()==myCal.getNow_month()) {
-                Paint today = new Paint();
-                today.setColor(Color.YELLOW);
-                Rect todayRect = new Rect();
-                todayRect.set((int)(j*width), (int)(count * height+ oldheight), (int)(j*width+width), (int)(count * height+height+ oldheight));
-                canvas.drawRect(todayRect, today);
+                drawToday(canvas,
+                        (int)(j*width),
+                        (int)(count * height+ oldheight), 
+                        (int)(j*width+width),
+                        (int)(count * height+height+ oldheight));
             }
-            
+
             canvas.drawText(i.toString(), j
                     * width + x, count * height + y + oldheight, foreground);
             j++;
@@ -109,15 +126,14 @@ public class MainView extends View {
                 count++;
             }
         }
-
-
     }
 
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        width = w / 7f;
-        height = h / 7f;
-        super.onSizeChanged(w, h, oldw, oldh);
+    private void drawToday(Canvas canvas, int x0,int y0,int x1,int y1){
+         Paint today = new Paint();
+                today.setColor(Color.YELLOW);
+                Rect todayRect = new Rect();
+                todayRect.set(x0, y0, x1, y1);
+                canvas.drawRect(todayRect, today);
     }
 
     private String getDate() {
