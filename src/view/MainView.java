@@ -13,9 +13,6 @@ import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.view.View;
 import contraler.NomalCalendar;
-//import java.text.SimpleDateFormat;
-//import java.util.Calendar;
-//import java.util.Date;
 
 /**
  *
@@ -27,8 +24,7 @@ public class MainView extends View {
         super(context);
         setFocusable(true);
         setFocusableInTouchMode(true);
-        initDate();
-        
+        initDate();        
     }
 
     @Override
@@ -67,8 +63,6 @@ public class MainView extends View {
         canvas.drawText(String.valueOf(myCal.getCurrent_month()+1), getWidth() / 2f, (rheight / 2f)+2*oldheight, montPaint);
 
         Paint foreground = new Paint(Paint.ANTI_ALIAS_FLAG);
-//      foreground.setColor(getResources().getColor(
-//            R.color.puzzle_foreground));
         foreground.setColor(Color.RED);
         foreground.setStyle(Style.FILL);
 
@@ -97,15 +91,9 @@ public class MainView extends View {
 
         //draw all the month
         int count = 1;
-//        int j = getFirDayWeekOfMonth(now_year, now_month) - 1;
         int j = myCal.getFirDayWeekOfMonth()-1;
-//      System.out.println("j:"+j);
-//        for (Integer i = 1; i <= getMonthDays(now_year, now_month); i++) {
         for (Integer i = 1; i <= myCal.getMonthDays(); i++) {
-//            if (i == now_day) {
             if (i == myCal.getNow_day() && myCal.getCurrent_month()==myCal.getNow_month()) {
-                //draw today
-//                System.out.println("i:"+now_day);
                 Paint today = new Paint();
                 today.setColor(Color.YELLOW);
                 Rect todayRect = new Rect();
@@ -129,46 +117,22 @@ public class MainView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         width = w / 7f;
         height = h / 7f;
-
         super.onSizeChanged(w, h, oldw, oldh);
     }
 
     private String getDate() {
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy'年'MM'月'dd'日'");
-//        return sdf.format(now.getTime());
         return myCal.getCurrent_year()+"年"+(myCal.getCurrent_month()+1)+"月"+myCal.getCurrent_day()+"日";
     }
 
     private void initDate() {
-//        this.now_day = now.get(Calendar.DATE);
-//        this.now_month = now.get(Calendar.MONTH);
-//        this.now_year = now.get(Calendar.YEAR);
         myCal = new NomalCalendar();
         weeks = myCal.getWeeks();
     }
-
-//    private int getFirDayWeekOfMonth(int year, int month) {
-//        Calendar cal = Calendar.getInstance();
-//        cal.set(year, month, 1);
-//        return cal.get(Calendar.DAY_OF_WEEK);
-//    }
-//
-//    private int getMonthDays(int year, int month) {
-//        Calendar cal = Calendar.getInstance();
-//        cal.set(year, month, 1);
-//        return cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-////        return Calendar.DAY_OF_MONTH;
-//    }
     private float width;    // width of one tile
     private float height;   // height of one tile
     private int selX;       // X index of selection
     private int selY;       // Y index of selection
     private final Rect selRect = new Rect();
-//    private Calendar now = Calendar.getInstance();
-    private String[] weeks ;//= {"日", "一", "二", "三", "四", "五", "六"};
-//    private int now_year;
-//    private int now_month;
-//    private int now_day;
-
+    private String[] weeks ;
     private NomalCalendar myCal;
 }
