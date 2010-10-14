@@ -5,19 +5,33 @@
 package view;
 
 import android.content.Context;
-import android.content.res.Resources;
+import android.os.Bundle;
+import android.os.Parcelable;
+
+;
+
 import android.graphics.Canvas;
+
 import android.graphics.Color;
+
 import android.graphics.Paint;
+
 import android.graphics.Paint.FontMetrics;
+
 import android.graphics.Paint.Style;
-import android.graphics.Path;
+
 import android.graphics.Rect;
+
 import android.graphics.drawable.BitmapDrawable;
+
 import android.view.KeyEvent;
+
 import android.view.MotionEvent;
+
 import android.view.View;
+
 import contraler.NomalCalendar;
+
 import org.me.mutifuncalendar.MainActivity;
 
 /**
@@ -28,6 +42,7 @@ public class MainView extends View {
 
     public MainView(Context context) {
         super(context);
+        this.setId(83);
         setBackgroundResource(org.me.mutifuncalendar.R.drawable.background);
 
         this.main = (MainActivity) context;
@@ -38,9 +53,31 @@ public class MainView extends View {
     }
 
     @Override
+    protected Parcelable onSaveInstanceState() {
+        Parcelable p = super.onSaveInstanceState();
+//      Log.d(TAG, "onSaveInstanceState");
+        Bundle bundle = new Bundle();
+        bundle.putInt("currentday", myCal.getCurrent_day());
+        bundle.putInt("currentmonth", myCal.getCurrent_month());
+        bundle.putInt("currentyear", myCal.getCurrent_year());
+        bundle.putParcelable("nonthview", p);
+        return bundle;
+//        return super.onSaveInstanceState();
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        Bundle bundle = (Bundle) state;
+//      select(bundle.getInt(SELX), bundle.getInt(SELY));
+        myCal.setDate(bundle.getInt("currentyear"), bundle.getInt("currentmonth"), bundle.getInt("currentday"));
+        super.onRestoreInstanceState(bundle.getParcelable("nonthview"));
+        return;
+//        super.onRestoreInstanceState(state);
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         //draw the head
         drawHead(canvas, oldheight);
         // Draw the minor grid lines
@@ -90,6 +127,10 @@ public class MainView extends View {
             if (y > oldheight) {
                 select((int) (event.getX() / width),
                         (int) ((event.getY() - oldheight) / height));
+//                sleep(500);
+                if (getSelectDay() != 0) {
+                    this.main.setContentView(new DayView(main, this));
+                }
                 return true;
             }
             headpaint.setARGB(100, 100, 200, 100);
@@ -141,7 +182,7 @@ public class MainView extends View {
 
     private void drawHead(Canvas canvas, float oldheight) {
         Rect headRect = new Rect();
-        headRect.set((int)width, 0, (int)(6*width), (int)oldheight);
+        headRect.set((int) width, 0, (int) (6 * width), (int) oldheight);
         canvas.drawRect(headRect, headpaint);
 //        canvas.drawLine(0, oldheight, getWidth(), oldheight, head);
 //        canvas.drawLine(width, 0, width, oldheight, head);
@@ -248,7 +289,7 @@ public class MainView extends View {
         Paint today = new Paint();
 //        today.setColor(Color.YELLOW);
         today.setARGB(200, 255, 255, 0);
-        BitmapDrawable bd = (BitmapDrawable)getResources().getDrawable(org.me.mutifuncalendar.R.drawable.today_icon);
+        BitmapDrawable bd = (BitmapDrawable) getResources().getDrawable(org.me.mutifuncalendar.R.drawable.today_icon);
         Rect todayRect = new Rect();
         todayRect.set(x0, y0, x1, y1);
         canvas.drawBitmap(bd.getBitmap(), null, todayRect, null);
@@ -275,6 +316,7 @@ public class MainView extends View {
         selY = Math.min(Math.max(y, 0), 8);
         getRect(selX, selY, selRect);
         invalidate(selRect);
+        this.myCal.setCurrent_day(getSelectDay());
     }
 
     public int getSelectDay() {
@@ -284,13 +326,13 @@ public class MainView extends View {
         return locations[selY - 1][selX];
     }
 
-    public void setSelectDay( int day){
+    public void setSelectDay(int day) {
         locations = new int[6][7];
         int count = 1;
         int j = myCal.getFirDayWeekOfMonth() - 1;
         for (Integer i = 1; i <= myCal.getMonthDays(); i++) {
             locations[count - 1][j] = i;
-            if(i == day){
+            if (i == day) {
                 this.selY = count;
                 this.selX = j;
                 invalidate(selRect);
@@ -324,7 +366,7 @@ public class MainView extends View {
     private int selX;       // X index of selection
     private int selY;       // Y index of selection
     private final Rect selRect = new Rect();
-    private  Paint headpaint = new Paint();
+    private Paint headpaint = new Paint();
 //    private final Rect headRect = new Rect();
 //    private int headColor = Color.TRANSPARENT;
     private String[] weeks;

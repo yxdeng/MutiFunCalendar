@@ -21,16 +21,20 @@ public final class R {
         public static final int today_icon=0x7f020007;
     }
     public static final class id {
+        public static final int add_note=0x7f060005;
         public static final int backbutton=0x7f060003;
         public static final int dateId=0x7f060001;
         public static final int keypad=0x7f060000;
-        public static final int menu_back_now_id=0x7f060005;
-        public static final int menu_note_id=0x7f060004;
+        public static final int menu_back_now_id=0x7f060008;
+        public static final int menu_note_id=0x7f060007;
+        public static final int note_back=0x7f060006;
+        public static final int note_catalog=0x7f060004;
         public static final int scanbutton=0x7f060002;
     }
     public static final class layout {
         public static final int main=0x7f030000;
         public static final int monthview=0x7f030001;
+        public static final int note_navigation=0x7f030002;
     }
     public static final class menu {
         public static final int monthmenu=0x7f050000;

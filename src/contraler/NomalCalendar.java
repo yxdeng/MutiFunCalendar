@@ -36,6 +36,10 @@ public class NomalCalendar {
         cal.set(current_year, current_month, current_day);
         return res;
     }
+     public int getDayWeekOfMonth() {
+        cal.set(current_year, current_month, current_day);
+        return cal.get(Calendar.DAY_OF_WEEK);
+    }
 
      /**
       * return the sum of the current_month
@@ -100,6 +104,12 @@ public class NomalCalendar {
 
     public int getNow_year() {
         return now_year;
+    }
+
+    @Override
+    public String toString() {
+
+        return this.current_day + " "+this.current_month +" "+ this.current_year;
     }
 
 

@@ -6,11 +6,14 @@ package org.me.mutifuncalendar;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import view.DayView;
 import view.MainView;
+import view.SetDayView;
 import view.SetMonthView;
 
 /**
@@ -46,6 +49,10 @@ public class MainActivity extends Activity {
             case R.id.menu_back_now_id:
                 setContentView(new MainView(this));
                 break;
+            case R.id.menu_note_id:
+                Intent intent = new Intent(this, NoteActivity.class);
+                this.startActivity(intent);
+                break;
         }
         return true;
     }
@@ -53,5 +60,10 @@ public class MainActivity extends Activity {
     public void showMonthView(MainView main){
         Dialog monthview = new SetMonthView(this,main);
         monthview.show();
+    }
+
+    public void showDayView(MainView main,DayView day){
+        Dialog dayview = new SetDayView(this,main,day);
+        dayview.show();
     }
 }
