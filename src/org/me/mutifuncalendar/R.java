@@ -18,6 +18,7 @@ public final class R {
         public static final int arrow_right_first=0x7f020004;
         public static final int arrow_right_last=0x7f020005;
         public static final int background=0x7f020006;
+        public static final int today_icon=0x7f020007;
     }
     public static final class id {
         public static final int backbutton=0x7f060003;

@@ -246,10 +246,13 @@ public class MainView extends View {
 
     private void drawToday(Canvas canvas, int x0, int y0, int x1, int y1) {
         Paint today = new Paint();
-        today.setColor(Color.YELLOW);
+//        today.setColor(Color.YELLOW);
+        today.setARGB(200, 255, 255, 0);
+        BitmapDrawable bd = (BitmapDrawable)getResources().getDrawable(org.me.mutifuncalendar.R.drawable.today_icon);
         Rect todayRect = new Rect();
         todayRect.set(x0, y0, x1, y1);
-        canvas.drawRect(todayRect, today);
+        canvas.drawBitmap(bd.getBitmap(), null, todayRect, null);
+//        canvas.drawRect(todayRect, today);
     }
 
     private void drawSelectRect(Canvas canvas) {
@@ -279,6 +282,28 @@ public class MainView extends View {
             return 0;
         }
         return locations[selY - 1][selX];
+    }
+
+    public void setSelectDay( int day){
+        locations = new int[6][7];
+        int count = 1;
+        int j = myCal.getFirDayWeekOfMonth() - 1;
+        for (Integer i = 1; i <= myCal.getMonthDays(); i++) {
+            locations[count - 1][j] = i;
+            if(i == day){
+                this.selY = count;
+                this.selX = j;
+                invalidate(selRect);
+                getRect(selX, selY, selRect);
+                invalidate(selRect);
+                return;
+            }
+            j++;
+            if (j == 7) {
+                j = 0;
+                count++;
+            }
+        }
     }
 
     private String getDate() {
