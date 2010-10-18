@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-     package="org.me.mutifuncalendar">
+          package="org.me.mutifuncalendar">
     <application>
-         <activity android:name=".MainActivity" android:label="Multifunctional Calendar">
+        <!--<activity android:name=".MainActivity" android:label="Multifunctional Calendar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>-->
+        <activity android:name=".CalendarActivity" android:label="Multifunctional Calendar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name=".NoteActivity"
-              android:label="NOTE">
+                  android:label="NOTE">
+        </activity>
+        <activity android:name="org.dbtest.DBTestActivity"
+                  android:label="db test">
         </activity>
     </application>
 </manifest>

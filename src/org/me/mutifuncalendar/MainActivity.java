@@ -30,6 +30,7 @@ public class MainActivity extends Activity {
 //        this.setContentView(R.layout.main);
 //        this.findViewById()
         this.setContentView(new MainView(this));
+//        showDbtest();
     }
 
     @Override
@@ -58,12 +59,16 @@ public class MainActivity extends Activity {
     }
 
     public void showMonthView(MainView main){
-        Dialog monthview = new SetMonthView(this,main);
-        monthview.show();
+//        Dialog monthview = new SetMonthView(this,main);
+//        monthview.show();
     }
 
     public void showDayView(MainView main,DayView day){
         Dialog dayview = new SetDayView(this,main,day);
         dayview.show();
+    }
+    public void showDbtest(){
+        Intent intent = new Intent(this, dbtest.DBTestActivity.class);
+        this.startActivity(intent);
     }
 }

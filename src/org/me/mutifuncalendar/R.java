@@ -21,20 +21,49 @@ public final class R {
         public static final int today_icon=0x7f020007;
     }
     public static final class id {
-        public static final int add_note=0x7f060005;
+        public static final int add_note=0x7f060015;
         public static final int backbutton=0x7f060003;
         public static final int dateId=0x7f060001;
         public static final int keypad=0x7f060000;
-        public static final int menu_back_now_id=0x7f060008;
-        public static final int menu_note_id=0x7f060007;
-        public static final int note_back=0x7f060006;
-        public static final int note_catalog=0x7f060004;
+        public static final int menu_back_now_id=0x7f060022;
+        public static final int menu_note_id=0x7f060021;
+        public static final int note_back=0x7f060016;
+        public static final int note_catalog=0x7f060014;
+        public static final int notecatalog_label=0x7f060004;
+        public static final int notecatalog_subjects=0x7f060005;
+        public static final int noteedit_button=0x7f060011;
+        public static final int noteedit_cancal=0x7f060013;
+        public static final int noteedit_content=0x7f060010;
+        public static final int noteedit_date=0x7f06000a;
+        public static final int noteedit_endtime=0x7f06000d;
+        public static final int noteedit_label=0x7f060009;
+        public static final int noteedit_place=0x7f06000c;
+        public static final int noteedit_remindtime=0x7f06000e;
+        public static final int noteedit_repeattype=0x7f06000f;
+        public static final int noteedit_save=0x7f060012;
+        public static final int noteedit_time=0x7f06000b;
+        public static final int notescatalog_subject=0x7f060007;
+        public static final int notescatalog_time=0x7f060006;
+        public static final int notesubject_back=0x7f060020;
+        public static final int notesubject_button=0x7f06001e;
+        public static final int notesubject_content_label=0x7f06001c;
+        public static final int notesubject_edit=0x7f06001f;
+        public static final int notesubject_place=0x7f06001b;
+        public static final int notesubject_subject=0x7f060018;
+        public static final int notesubject_time=0x7f06001a;
         public static final int scanbutton=0x7f060002;
+        public static final int widget29=0x7f060017;
+        public static final int widget31=0x7f060019;
+        public static final int widget37=0x7f060008;
+        public static final int widget46=0x7f06001d;
     }
     public static final class layout {
         public static final int main=0x7f030000;
         public static final int monthview=0x7f030001;
-        public static final int note_navigation=0x7f030002;
+        public static final int note_catalog=0x7f030002;
+        public static final int note_edit=0x7f030003;
+        public static final int note_navigation=0x7f030004;
+        public static final int note_subject=0x7f030005;
     }
     public static final class menu {
         public static final int monthmenu=0x7f050000;

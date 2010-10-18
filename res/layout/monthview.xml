@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/keypad"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:stretchColumns="*">
+    <TableRow>
+        <DatePicker
+            android:id="@+id/dateId"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            >
+        </DatePicker>
+    </TableRow>
+
+    <TableRow>
+        <Button
+            android:id="@+id/scanbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scan"
+            android:layout_below="@+id/dateId"
+            android:layout_alignParentLeft="true"
+            >
+        </Button>
+    </TableRow>
+    <TableRow>
+        <Button
+            android:id="@+id/backbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:layout_alignTop="@+id/scanbutton"
+            android:layout_toRightOf="@+id/scanbutton"
+            >
+        </Button>
+        </TableRow>
+</TableLayout>
